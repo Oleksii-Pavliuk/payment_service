@@ -1,0 +1,7 @@
+{
+  "port": 3002,
+  "redisstring": "redis://localhost:6379",
+  "jaegerHost" : "localhost",
+  "amqphost": "localhost",
+  "amqpport": 5672
+}

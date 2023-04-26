@@ -1,0 +1,7 @@
+{
+  "port": 3002,
+  "redisstring": "redis://users-redis:6379",
+  "jaegerHost" : "jaeger",
+  "amqphost": "rabbitmq",
+  "amqpport": 5672
+}
