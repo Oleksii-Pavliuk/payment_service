@@ -9,15 +9,17 @@ interface IConfigSchema {
 	consulPort: number;
 	jaegerHost: string;
 	jaegerPort: number;
-	ampqhost: string;
-	ampqport: number;
+	amqphost: string;
+	amqpport: number;
+	stripeSecretKey: string;
+	stripePublicKey: string;
 }
 
 const config: convict.Config<IConfigSchema> = convict({
 	env: {
 		doc: "Environoment for application",
 		format: ["development", "production", "test"],
-		default: "development",
+		default: "test",
 		env: "NODE_ENV",
 	},
 	port: {
@@ -80,6 +82,20 @@ const config: convict.Config<IConfigSchema> = convict({
 		default: null,
 		env: "AMQPPORT",
 		arg: "amqpport",
+	},
+	spriteSecretKey: {
+		doc: "secret key for stripe account",
+		format : String,
+		default : null,
+		env: "STRIPE_SEC_KEY",
+		arg: "spriteSecretKey"
+	},
+	spritePublicKey: {
+		doc: "public key for stripe account",
+		format : String,
+		default : null,
+		env: "STRIPE_PUB_KEY",
+		arg: "spritePublicKey"
 	}
 } as unknown as Schema<IConfigSchema>);
 
