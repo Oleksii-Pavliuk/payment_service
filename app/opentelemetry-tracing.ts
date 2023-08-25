@@ -1,4 +1,4 @@
-import {NodeSDK } from "@opentelemetry/sdk-node";
+import { NodeSDK } from "@opentelemetry/sdk-node";
 import { getNodeAutoInstrumentations } from "@opentelemetry/auto-instrumentations-node";
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-http";
 import { SemanticResourceAttributes } from "@opentelemetry/semantic-conventions";
@@ -8,10 +8,10 @@ import config from "./config/config"
 
 const JAEGER_HOST = config.get("jaegerHost")
 const JAEGER_PORT = config.get("jaegerPort")
-
+const JAEGER_SERVICE_NAME: string = config.get("ServiceName");
 
 const resource : any  = new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: "User Managment SERVICE",
+    [SemanticResourceAttributes.SERVICE_NAME]: JAEGER_SERVICE_NAME,
   });
 const sdk = new NodeSDK({
     resource  ,

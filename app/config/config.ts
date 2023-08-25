@@ -4,7 +4,7 @@ interface IConfigSchema {
 	env: string;
 	port: number;
 	redisstring: string;
-	consulServiceName: string;
+	ServiceName: string;
 	consulHost: string;
 	consulPort: number;
 	jaegerHost: string;
@@ -37,11 +37,11 @@ const config: convict.Config<IConfigSchema> = convict({
 		arg: "redisstring",
 		sensitive: true,
 	},
-	consulServiceName: {
+	ServiceName: {
 		doc: "The name by which the service is registered in Consul. If not specified, the service is not registered",
 		format: "*",
-		default: "payments",
-		env: "CONSUL_SERVICE_NAME",
+		default: "Payments SERVICE",
+		env: "SERVICE_NAME",
 	},
 	consulHost: {
 		doc: "The host where the Consul server runs",
@@ -83,14 +83,14 @@ const config: convict.Config<IConfigSchema> = convict({
 		env: "AMQPPORT",
 		arg: "amqpport",
 	},
-	spriteSecretKey: {
+	stripeSecretKey: {
 		doc: "secret key for stripe account",
 		format : String,
 		default : null,
 		env: "STRIPE_SEC_KEY",
 		arg: "spriteSecretKey"
 	},
-	spritePublicKey: {
+	stripePublicKey: {
 		doc: "public key for stripe account",
 		format : String,
 		default : null,
