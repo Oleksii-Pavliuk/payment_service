@@ -54,17 +54,15 @@ export async function handleMessageConsume(
 	channel: amqp.Channel,
 	msg: amqp.ConsumeMessage | null,
 	handlers: {
-		stripe_deposit: (messageContent: any) => Promise<string | null>;
+		stripe_deposit: typeof handleNewStripeDeposit;
 	}
 ) {
 	if (msg !== null) {
 		const handler = handlers[msg.properties.type as "stripe_deposit"];
 		if (handler) {
-			const response = await handler(msg.content.toString());
+			const response = await handler(msg.content.toString(), channel);
 			//Send the response with client secret back.
 			if (response){
-				console.log('repling back');
-				console.log(response);
 				channel.sendToQueue(msg.properties.replyTo,Buffer.from(response.toString()), {correlationId: msg.properties.correlationId});
 			}
 		} else {
@@ -84,5 +82,5 @@ export async function handleMessageConsume(
 ================== */
 app.listen(PORT, () => {
 	console.log(`Server started on port ${PORT}`);
-	// registerConsul();
+	registerConsul();
 });

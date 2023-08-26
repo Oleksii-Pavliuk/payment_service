@@ -1,7 +1,10 @@
 {
   "port": 3002,
   "redisstring": "redis://localhost:6379",
+  "consulHost" : "localhost",
   "jaegerHost" : "localhost",
   "amqphost": "localhost",
-  "amqpport": 5672
+  "amqpport": 5672,
+  "stripeSecretKey": "test",
+  "stripePublicKey": "test"
 }

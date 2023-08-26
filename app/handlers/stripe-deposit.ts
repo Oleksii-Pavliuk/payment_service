@@ -1,6 +1,9 @@
 import { stripe } from "./stripe";
+import { Channel } from "amqplib";
 
-export async function handleNewStripeDeposit(messageContent: string) {
+import {createNewTransactionEntry} from "./add-transaction-toDB"
+
+export async function handleNewStripeDeposit(messageContent: string, channel : Channel) {
 	console.log("Received new_message: ", messageContent);
 
 	// createCustomer();
@@ -15,5 +18,13 @@ export async function handleNewStripeDeposit(messageContent: string) {
 	// 	},
 	// });
 	// return paymentIntent.client_secret;
+
+
+	msg.destination = "deposits"
+
+	createNewTransactionEntry(JSON.stringify(msg), channel);
+
 	return msg;
+
+
 }
