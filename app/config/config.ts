@@ -40,7 +40,7 @@ const config: convict.Config<IConfigSchema> = convict({
 	ServiceName: {
 		doc: "The name by which the service is registered in Consul. If not specified, the service is not registered",
 		format: "*",
-		default: "Payments SERVICE",
+		default: "Payments Service",
 		env: "SERVICE_NAME",
 	},
 	consulHost: {
